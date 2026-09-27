@@ -1,5 +1,6 @@
 import { setProgressSite } from './progress.js'
 import { SITES } from './schema.js'
+import { listSiteCards } from '../shared/catalog.js'
 import { scrapeG2b } from './sites/g2b.js'
 import { scrapeLh } from './sites/lh.js'
 import { scrapeD2b } from './sites/d2b.js'
@@ -13,13 +14,7 @@ const runners = {
 }
 
 export function listSites() {
-  return SITES.map(({ id, name, url, menuPath }) => ({
-    id,
-    name,
-    url,
-    menuPath: menuPath.join(' > '),
-    buttonLabel: `${name} 조회시작`,
-  }))
+  return listSiteCards()
 }
 
 export async function scrapeById(id) {

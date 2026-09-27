@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { listSiteCards, OUTPUT_COLUMNS } from '../shared/catalog.js'
 import { downloadXlsx } from './utils/download'
 import './App.css'
 
@@ -29,20 +30,27 @@ async function waitForScrape(siteId, onProgress) {
 }
 
 function App() {
-  const [sites, setSites] = useState([])
-  const [columns, setColumns] = useState([])
+  const [sites, setSites] = useState(listSiteCards)
+  const [columns, setColumns] = useState(OUTPUT_COLUMNS)
   const [results, setResults] = useState({})
+  const [canScrape, setCanScrape] = useState(null)
   const watchingRef = useRef('')
 
   useEffect(() => {
     fetch('/api/sites')
-      .then((response) => response.json())
+      .then(async (response) => {
+        if (!response.ok) throw new Error('sites')
+        return response.json()
+      })
       .then((data) => {
-        setSites(data.sites || [])
-        setColumns(data.columns || [])
+        setSites(data.sites?.length ? data.sites : listSiteCards())
+        setColumns(data.columns?.length ? data.columns : OUTPUT_COLUMNS)
+        setCanScrape(data.scraping === true)
       })
       .catch(() => {
-        setSites([])
+        setSites(listSiteCards())
+        setColumns(OUTPUT_COLUMNS)
+        setCanScrape(false)
       })
   }, [])
 
@@ -143,7 +151,7 @@ function App() {
   }
 
   useEffect(() => {
-    if (!sites.length) return
+    if (!sites.length || canScrape === false) return
     let cancelled = false
     fetch('/api/scrape/progress')
       .then((response) => response.json())
@@ -156,7 +164,7 @@ function App() {
     return () => {
       cancelled = true
     }
-  }, [sites])
+  }, [sites, canScrape])
 
   function scrapeSite(site) {
     watchScrape(site, true)
@@ -176,6 +184,12 @@ function App() {
           나라장터, 토지주택공사, 국방부, 도로공사에서 각각 조회한 뒤, 같은 양식으로 모아
           xlsx로 내려받습니다. 필성건설이 참여한 건은 당사 투찰율·사정율·순위가 채워집니다.
         </p>
+        {canScrape === false ? (
+          <p className="hint">
+            이 배포에는 조회 서버가 없습니다. 사이트 버튼은 보이지만, 실제 수집은 로컬에서 npm run
+            dev로 실행해야 합니다.
+          </p>
+        ) : null}
       </header>
 
       <section className="site-grid">
@@ -190,7 +204,7 @@ function App() {
               </div>
               <button
                 type="button"
-                disabled={result?.status === 'loading'}
+                disabled={result?.status === 'loading' || canScrape === false}
                 onClick={() => scrapeSite(site)}
               >
                 {result?.status === 'loading' ? '조회 중...' : site.buttonLabel}
