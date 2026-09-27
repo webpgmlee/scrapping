@@ -1,0 +1,174 @@
+.app {
+  display: grid;
+  gap: 24px;
+  padding: 40px 32px 64px;
+  text-align: left;
+}
+
+.hero-panel {
+  padding: 8px 4px 0;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #0f766e;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.lede {
+  max-width: 46rem;
+  color: #475569;
+}
+
+.site-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.site-card,
+.history-card,
+.result-card {
+  display: grid;
+  gap: 12px;
+  padding: 20px;
+}
+
+.history-card h2,
+.history-group h3 {
+  margin: 0;
+}
+
+.history-group h3 {
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.history-list {
+  display: grid;
+  gap: 12px;
+  max-height: 240px;
+  overflow: auto;
+}
+
+.site-url {
+  color: #64748b;
+  font-size: 13px;
+  word-break: break-all;
+}
+
+.hint {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+button {
+  justify-self: start;
+  padding: 12px 18px;
+  border: 0;
+  border-radius: 10px;
+  background: #0f766e;
+  color: #fff;
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+button.secondary {
+  background: #0f172a;
+}
+
+.status {
+  margin: 0;
+  font-size: 14px;
+  color: #475569;
+}
+
+.status.done {
+  color: #0f766e;
+}
+
+.status.error {
+  color: #b91c1c;
+}
+
+.logs,
+.alert-list {
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+.logs {
+  background: #f8fafc;
+  color: #475569;
+  list-style: none;
+}
+
+.alert-list {
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.result-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: start;
+}
+
+.table-wrap {
+  overflow: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+th,
+td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e2e8f0;
+  white-space: nowrap;
+  text-align: left;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+@media (max-width: 860px) {
+  .app {
+    padding: 24px 16px 40px;
+  }
+
+  .site-grid,
+  .result-meta {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+}

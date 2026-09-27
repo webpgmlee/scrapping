@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>샘플 매출 현황</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="/sample.html">홈</a>
+        <a href="/sample.html">매출관리</a>
+        <a href="/sample.html">월별현황</a>
+      </nav>
+    </header>
+    <main>
+      <h1>월별현황</h1>
+      <form>
+        <label>
+          연도
+          <input name="year" placeholder="연도" />
+        </label>
+        <label>
+          부서
+          <input name="dept" placeholder="부서" />
+        </label>
+        <button type="submit">검색</button>
+      </form>
+      <table>
+        <caption>월별 실적</caption>
+        <thead>
+          <tr>
+            <th>월</th>
+            <th>매출</th>
+            <th>원가</th>
+            <th>수량</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1월</td>
+            <td>1200000</td>
+            <td>800000</td>
+            <td>12</td>
+          </tr>
+          <tr>
+            <td>2월</td>
+            <td>1500000</td>
+            <td>900000</td>
+            <td>15</td>
+          </tr>
+          <tr>
+            <td>3월</td>
+            <td>1100000</td>
+            <td>700000</td>
+            <td>11</td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </body>
+</html>

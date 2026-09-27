@@ -1,0 +1,39 @@
+:root {
+  --sans: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+  font: 16px/1.5 var(--sans);
+  color: #0f172a;
+  background: #eef3f6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  width: min(1080px, 100%);
+  margin: 0 auto;
+  min-height: 100svh;
+}
+
+h1,
+h2 {
+  margin: 0;
+  letter-spacing: -0.03em;
+}
+
+h1 {
+  margin-bottom: 10px;
+  font-size: 40px;
+}
+
+h2 {
+  font-size: 22px;
+}
+
+p {
+  margin: 0;
+}
